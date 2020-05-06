@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.epics</groupId>
         <artifactId>epics-parent</artifactId>
-        <version>7.0.5</version>
+        <version>7.0.6-SNAPSHOT</version>
     </parent>
 
     <artifactId>epics-pvdatabase</artifactId>
@@ -13,34 +13,7 @@
 
     <name>pvDatabaseJava</name>
     <url>https://github.com/epics-base/pvDatabaseJava</url>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.jfrog.buildinfo</groupId>
-                <artifactId>artifactory-maven-plugin</artifactId>
-                <version>2.7.0</version>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>publish</goal>
-                        </goals>
-                        <configuration>
-                            <publisher>
-                                <contextUrl>${artifactory.url}</contextUrl>
-                                <username>${artifactory.username}</username>
-                                <password>${artifactory.password}</password>
-                                <repoKey>libs-release-local</repoKey>
-                                <snapshotRepoKey>libs-snapshot-local</snapshotRepoKey>
-                            </publisher>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-    
+       
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
