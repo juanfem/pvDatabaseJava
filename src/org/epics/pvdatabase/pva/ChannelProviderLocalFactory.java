@@ -189,6 +189,8 @@ public class ChannelProviderLocalFactory  {
                 if(beingDestroyed) return;
                 beingDestroyed = true;
                 pvDatabase.destroy();
+                pvDatabase = null;
+                singleImplementation = null;
             } finally {
                 lock.unlock();
             }
