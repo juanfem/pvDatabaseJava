@@ -33,7 +33,7 @@ public class PVDatabaseFactory {
      * @return Interface to the single database instance.
      */
     public static synchronized PVDatabase getMaster() {
-        if(master==null) master = new Database();
+        if(master==null || master.isDestroyed) master = new Database();
         return master;
     }
 
@@ -52,6 +52,12 @@ public class PVDatabaseFactory {
          */
         public void destroy()
         {
+            for (Map.Entry<String, PVRecord> entry : recordMap.entrySet())
+            {
+                entry.getValue().destroy();
+            }
+            recordMap.clear();
+            
             rwLock.writeLock().lock();
             try {
                 if(isDestroyed) return;
@@ -59,11 +65,6 @@ public class PVDatabaseFactory {
             } finally {
                 rwLock.writeLock().unlock();
             }
-            for (Map.Entry<String, PVRecord> entry : recordMap.entrySet())
-            {
-                entry.getValue().destroy();
-            }
-            recordMap.clear();
         }
         /* (non-Javadoc)
          * @see org.epics.pvdatabase.PVDatabase#findRecord(java.lang.String)
