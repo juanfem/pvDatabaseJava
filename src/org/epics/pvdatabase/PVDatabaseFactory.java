@@ -52,9 +52,9 @@ public class PVDatabaseFactory {
          */
         public void destroy()
         {
-            for (Map.Entry<String, PVRecord> entry : recordMap.entrySet())
+            for (PVRecord record : new ArrayList<>(recordMap.values()))
             {
-                entry.getValue().destroy();
+                record.destroy();
             }
             recordMap.clear();
             
